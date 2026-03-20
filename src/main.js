@@ -14,7 +14,13 @@ const pkmnSpAtk = document.getElementById("special-attack");
 const pkmnSpDef = document.getElementById("special-defense");
 const pkmnSpd = document.getElementById("speed");
 const otherSpriteContainer = document.getElementById("all-sprite-container");
+const toggleAllSpriteContainer = document.getElementById(
+  "toggle-all-sprite-container",
+);
+const hideSpritesBtn = document.getElementById("hide-sprites-container");
+const spritePopupContainer = document.getElementById("sprite-popup-container");
 let pokemonData;
+let hidden = true;
 
 const getPkmnFromInput = () => {
   //format input
@@ -66,6 +72,8 @@ const renderPkmnData = (pkmn) => {
             <button class="sprite-btn"><img id="back-sprite" src="${pokemonData.sprites.back_default}" alt="${pokemonData.name}"/></button>
             <button class="sprite-btn"><img id="front-shiny-sprite" src="${pokemonData.sprites.front_shiny}" alt="${pokemonData.name}"/></button>
             <button class='sprite-btn'><img id="back-shiny-sprite" src="${pokemonData.sprites.back_shiny}" alt="${pokemonData.name}"/></button>`;
+  toggleAllSpriteContainer.innerHTML = `<button class="toggle-sprite-btn sprite-btn"><img class="front-shiny-sprite" src="${pokemonData.sprites.front_shiny}" alt="${pokemonData.name}"/></button>
+                                        <div class="btn-overlay">...</div>`;
   pkmnTypeContainer.innerHTML = pokemonData.types
     .map(
       (obj) =>
@@ -88,6 +96,8 @@ const renderPkmnData = (pkmn) => {
     const target = e.target.closest("img");
     if (!target) return;
     imgSpriteContainer.innerHTML = `<img id="sprite" src="${target.src}" alt="${target.name}"/>`;
+    spritePopupContainer.classList.add("hidden");
+    hidden = true;
   });
 };
 
@@ -95,6 +105,8 @@ const clearDisplay = () => {
   //remove sprite
 
   imgSpriteContainer.innerHTML = "";
+  otherSpriteContainer.innerHTML = "";
+  toggleAllSpriteContainer.innerHTML = "";
 
   //clear pokemon display / stats
 
@@ -120,4 +132,18 @@ pkmnSearchInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     fetchPkmnData(getPkmnFromInput());
   }
+});
+toggleAllSpriteContainer.addEventListener("click", () => {
+  if (hidden) {
+    spritePopupContainer.classList.remove("hidden");
+    hidden = false;
+  } else {
+    spritePopupContainer.classList.add("hidden");
+    hidden = true;
+  }
+});
+
+hideSpritesBtn.addEventListener("click", () => {
+  spritePopupContainer.classList.add("hidden");
+  hidden = true;
 });

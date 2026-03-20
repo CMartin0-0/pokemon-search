@@ -6,6 +6,10 @@
   padding: 0px;
 }
 
+html {
+  font-family: "Chakra Petch", Verdana, Garamond;
+}
+
 body {
   height: 100vh;
   min-width: 400px;
@@ -98,7 +102,7 @@ input:focus {
 .pkmn-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr auto 1fr;
+  grid-template-rows: min-content 1fr min-content;
   grid-column: 2;
   grid-row: 3;
   box-shadow: 0px 0px 5px 1px black;
@@ -115,7 +119,7 @@ input:focus {
   font-size: clamp(1.3rem, 2vw, 1.5rem);
   margin-bottom: 5px;
   margin-top: 5px;
-  grid-column: 1 / 4;
+  grid-column: 1;
   grid-row: 1;
   justify-self: center;
   text-shadow: 1px 1px 2px black;
@@ -123,10 +127,10 @@ input:focus {
 
 #pokemon-id {
   font-size: clamp(1.3rem, 2vw, 1.5rem);
-  grid-column: 1 / 4;
+  grid-column: 1;
   grid-row: 1;
-  justify-self: center;
   margin-top: 30px;
+  justify-self: center;
   text-shadow: 1px 1px 2px black;
 }
 
@@ -139,17 +143,13 @@ input:focus {
   text-shadow: 1px 1px 2px black;
 }
 
-#weight {
+#size-container {
+  display: grid;
+  height: auto;
   grid-column: 1;
   grid-row: 3;
-  margin-top: 60px;
 }
 
-#height {
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 30px;
-}
 .type {
   font-size: clamp(1rem, 1vw, 1.3rem);
   padding: 1px;
@@ -166,24 +166,98 @@ input:focus {
   height: auto;
 }
 
-#all-sprite-container {
-  display: grid;
-  grid-template-columns: 46px 46px;
-  grid-template-rows: 46px 46px;
-  grid-column: 3;
-  grid-row: 2;
+#sprite-container img {
+  scale: 1.5;
+}
 
+#toggle-all-sprite-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  width: 46px;
+  height: 46px;
+  grid-column: 3;
+  grid-row: 1;
   justify-self: center;
   align-self: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+div.btn-overlay {
+  position: relative;
+  height: 46px;
+  width: 46px;
+  grid-row: 1;
+  grid-column: 1;
+  z-index: 0;
+  top: -10px;
+  left: 2px;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.toggle-sprite-btn {
+  width: 46px;
+  height: 46px;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+#all-sprite-container {
+  display: grid;
+  grid-template-columns: 92px 92px;
+  grid-template-rows: 92px 92px;
+  grid-row: 2;
+  justify-self: center;
+  align-self: center;
+  z-index: 3;
+}
+
+#hide-sprites-container {
+  z-index: 3;
+  border: none;
+  background: transparent;
+  grid-row: 3;
+  cursor: pointer;
+  color: white;
+  font-family: inherit;
 }
 #front-sprite,
 #back-sprite,
 #front-shiny-sprite,
-#back-shiny-sprite {
+#back-shiny-sprite,
+.front-shiny-sprite {
   width: 100%;
   height: 100%;
   display: block;
   cursor: pointer;
+}
+
+#sprite-popup-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto 20px 1fr;
+  justify-self: center;
+  align-self: center;
+  width: 80%;
+  max-width: 400px;
+  height: 400px;
+  position: absolute;
+  z-index: 4;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(0.5px);
+  z-index: 0;
 }
 
 .sprite-btn {
@@ -193,7 +267,9 @@ input:focus {
 #sprite {
   object-fit: cover;
 }
-
+.hidden {
+  display: none !important;
+}
 #types {
   grid-row: 3;
   grid-column: 3;
@@ -373,5 +449,11 @@ a {
 
   input {
     width: 57.5%;
+  }
+}
+
+@media (orientation: landscape) {
+  main {
+    height: 100vh;
   }
 }

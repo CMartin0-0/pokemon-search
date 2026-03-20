@@ -10,7 +10,14 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-      <main class="main-container">
+      <main class="main-container"> 
+        <div id="sprite-popup-container" class="hidden">
+        <div class="overlay"></div>
+        <div id="all-sprite-container">
+            
+          </div> 
+          <button id="hide-sprites-container">Cancel</button>
+        </div>
         <div class="search-container">
           <label for="search-input" class="search-label">Enter a Pokémon's name or # to search</label>
           <input id="search-input" class="search-input" placeholder="Name or #:">
@@ -19,13 +26,16 @@
         <div class="pkmn-container">
           <div id="pokemon-name"></div>
           <div id="pokemon-id"></div>
-            <div id="sprite-container" class="sprite-container">
+          <div id="sprite-container" class="sprite-container">
           </div>
-          <div id="all-sprite-container">
-            
+          <div id="toggle-all-sprite-container" class="toggle-all-sprite-container">
+
           </div>
+         
+          <div id="size-container">
           <div id="weight"></div>
           <div id="height"></div>
+        </div>
           <div id="types">
           </div> 
         </div>
